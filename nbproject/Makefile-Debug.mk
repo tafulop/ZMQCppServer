@@ -39,17 +39,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/SocketClient.o \
 	${OBJECTDIR}/SocketServer.o
 
-# Test Directory
-TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
-
-# Test Files
-TESTFILES= \
-	${TESTDIR}/TestFiles/f1
-
-# Test Object Files
-TESTOBJECTFILES= \
-	${TESTDIR}/tests/SocketTest.o \
-	${TESTDIR}/tests/SocketTestRunner.o
 
 # C Compiler Flags
 CFLAGS=
@@ -94,75 +83,6 @@ ${OBJECTDIR}/SocketServer.o: SocketServer.cpp
 
 # Subprojects
 .build-subprojects:
-
-# Build Test Targets
-.build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
-.build-tests-subprojects:
-
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/SocketTest.o ${TESTDIR}/tests/SocketTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
-	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
-
-
-${TESTDIR}/tests/SocketTest.o: tests/SocketTest.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketTest.o tests/SocketTest.cpp
-
-
-${TESTDIR}/tests/SocketTestRunner.o: tests/SocketTestRunner.cpp 
-	${MKDIR} -p ${TESTDIR}/tests
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketTestRunner.o tests/SocketTestRunner.cpp
-
-
-${OBJECTDIR}/MessageHandler_nomain.o: ${OBJECTDIR}/MessageHandler.o MessageHandler.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/MessageHandler.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler_nomain.o MessageHandler.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/MessageHandler.o ${OBJECTDIR}/MessageHandler_nomain.o;\
-	fi
-
-${OBJECTDIR}/SocketClient_nomain.o: ${OBJECTDIR}/SocketClient.o SocketClient.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/SocketClient.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketClient_nomain.o SocketClient.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/SocketClient.o ${OBJECTDIR}/SocketClient_nomain.o;\
-	fi
-
-${OBJECTDIR}/SocketServer_nomain.o: ${OBJECTDIR}/SocketServer.o SocketServer.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/SocketServer.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketServer_nomain.o SocketServer.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/SocketServer.o ${OBJECTDIR}/SocketServer_nomain.o;\
-	fi
-
-# Run Test Targets
-.test-conf:
-	@if [ "${TEST}" = "" ]; \
-	then  \
-	    ${TESTDIR}/TestFiles/f1 || true; \
-	else  \
-	    ./${TEST} || true; \
-	fi
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
