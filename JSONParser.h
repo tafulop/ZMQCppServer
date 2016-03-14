@@ -16,6 +16,7 @@
 
 #include "../CustomLibraries/json.hh"
 #include <iostream>
+#include <sstream>
 
 class JSONParser {
 public:
@@ -29,7 +30,23 @@ public:
         o["given_name"] = "John";
         o["family_name"] = "Boags";
         
+        
         std::cout << o << std::endl;
+        
+        std::stringstream test;
+        
+        test << o;
+        std::cout << test.str() << std::endl;
+        
+        
+        JSON::Object o2 = parse_string(test.str());
+        std::cout << o2 << std::endl;
+        
+        for(std::map<std::string, JSON::Value>::iterator it = o2.begin(); it != o2.end(); ++it){ 
+            
+            std::cout << "Key: '" << it->first << "' value: '" << it->second.as_string() << "'" << std::endl;
+        }
+
 
     }
     
