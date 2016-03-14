@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>JSONParser.h</itemPath>
       <itemPath>MessageHandler.h</itemPath>
       <itemPath>SocketClient.h</itemPath>
       <itemPath>SocketServer.h</itemPath>
@@ -15,6 +16,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>JSONParser.cpp</itemPath>
       <itemPath>MessageHandler.cpp</itemPath>
       <itemPath>SocketClient.cpp</itemPath>
       <itemPath>SocketServer.cpp</itemPath>
@@ -23,6 +25,14 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="JSONParserTest"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/JSONParserTest.cpp</itemPath>
+        <itemPath>tests/JSONParserTest.h</itemPath>
+        <itemPath>tests/JSONParserTestRunner.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -42,11 +52,18 @@
       <compileType>
         <ccTool>
           <standard>8</standard>
+          <incFile>
+            <pElem>/mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh</pElem>
+          </incFile>
           <commandLine>-lzmq -lpthread</commandLine>
         </ccTool>
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="JSONParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="JSONParser.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MessageHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MessageHandler.h" ex="false" tool="3" flavor2="0">
@@ -61,9 +78,32 @@
       </item>
       <folder path="TestFiles">
         <linkerTool>
+          <linkerLibItems>
+            <linkerLibFileItem>/mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a</linkerLibFileItem>
+          </linkerLibItems>
           <commandLine>-lzmq</commandLine>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="tests/JSONParserTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/JSONParserTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/JSONParserTestRunner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="3">
       <toolsSet>
@@ -87,6 +127,10 @@
         <archiverTool>
         </archiverTool>
       </compileType>
+      <item path="JSONParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="JSONParser.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="MessageHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="MessageHandler.h" ex="false" tool="3" flavor2="0">
@@ -98,6 +142,26 @@
       <item path="SocketServer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="SocketServer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="tests/JSONParserTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/JSONParserTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/JSONParserTestRunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

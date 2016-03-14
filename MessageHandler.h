@@ -17,8 +17,6 @@
 #include <iostream>
 #include <zmq.hpp>
 
-#include "zmq.hpp" // to convert zmq messages
-
 class MessageHandler {
 public:
     
