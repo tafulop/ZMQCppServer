@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
+        <activeConfTypeElem>3</activeConfTypeElem>
+        <activeConfIndexElem>0</activeConfIndexElem>
+    </data>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketClient.h</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketClient.cpp</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketServer.h</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/MessageHandler.h</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/tests/SocketTest.h</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/tests/SocketTest.cpp</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/tests/SocketTestRunner.cpp</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/MessageHandler.cpp</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketServer.cpp</file>
+        </group>
+    </open-files>
+</project-private>
