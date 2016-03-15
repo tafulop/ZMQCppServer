@@ -45,12 +45,15 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1
+	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f2
 
 # Test Object Files
 TESTOBJECTFILES= \
 	${TESTDIR}/tests/JSONParserTest.o \
-	${TESTDIR}/tests/JSONParserTestRunner.o
+	${TESTDIR}/tests/JSONParserTestRunner.o \
+	${TESTDIR}/tests/SocketCommunicationTest.o \
+	${TESTDIR}/tests/SocketCommunicationTestRunner.o
 
 # C Compiler Flags
 CFLAGS=
@@ -109,6 +112,10 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/JSONParserTest.o ${TESTDIR}/tests/JSON
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
 
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SocketCommunicationTest.o ${TESTDIR}/tests/SocketCommunicationTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
+
 
 ${TESTDIR}/tests/JSONParserTest.o: tests/JSONParserTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
@@ -120,6 +127,18 @@ ${TESTDIR}/tests/JSONParserTestRunner.o: tests/JSONParserTestRunner.cpp
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTestRunner.o tests/JSONParserTestRunner.cpp
+
+
+${TESTDIR}/tests/SocketCommunicationTest.o: tests/SocketCommunicationTest.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTest.o tests/SocketCommunicationTest.cpp
+
+
+${TESTDIR}/tests/SocketCommunicationTestRunner.o: tests/SocketCommunicationTestRunner.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTestRunner.o tests/SocketCommunicationTestRunner.cpp
 
 
 ${OBJECTDIR}/JSONParser_nomain.o: ${OBJECTDIR}/JSONParser.o JSONParser.cpp 
@@ -179,6 +198,7 @@ ${OBJECTDIR}/SocketServer_nomain.o: ${OBJECTDIR}/SocketServer.o SocketServer.cpp
 	@if [ "${TEST}" = "" ]; \
 	then  \
 	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f2 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi

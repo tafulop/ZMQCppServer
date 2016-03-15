@@ -32,7 +32,6 @@ void JSONParserTest::tearDown() {
 
 void JSONParserTest::testMethod() {
    
-    
     JSONParser::test();
     
     CPPUNIT_ASSERT(true);

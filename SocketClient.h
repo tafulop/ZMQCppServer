@@ -33,6 +33,9 @@ public:
     
     static void localClientTest();
   
+    static void JSONSendingTest();
+    
+    
 private:
 
 

@@ -55,16 +55,18 @@ void SocketServer::serverListener(){
         zmq::message_t request;
         socket.recv (&request);
 
-        // pass the received message to its handler
-        std::string str_request = msgHandler.convertMessage(&request);
+        // Parse the received message as a JSON object
+        JSON::Object json_req = JSONParser::parseZMQMessage(&request);
+        
+        // Pass the JSON object to message handler, and get the response message
+        std::string str_response = msgHandler.createResponse(json_req);
 
-        //  Creating reply
-        std::string str_response = msgHandler.createResponse(str_request);
+        std::cout << "SocketServer - Response created: " << str_response << std::endl;
         
         // if there is anything in response, build message
         if(str_response.empty() == false){
-            zmq::message_t response = msgHandler.buildMessage(str_response);
-            socket.send (response);
+            zmq::message_t zmq_response = msgHandler.buildMessage(str_response);
+            socket.send (zmq_response);
         }   
     }
 }

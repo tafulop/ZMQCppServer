@@ -15,20 +15,19 @@
 #define JSONPARSER_H
 
 #include "../CustomLibraries/json.hh"
+#include "zmq.hpp"
 #include <iostream>
 #include <sstream>
 
 class JSONParser {
 public:
-    JSONParser();
-    JSONParser(const JSONParser& orig);
-    virtual ~JSONParser();
     
     static void test(){
         
         JSON::Object o;
         o["given_name"] = "John";
         o["family_name"] = "Boags";
+        o["angle"] = 123.456;
         
         
         std::cout << o << std::endl;
@@ -45,12 +44,30 @@ public:
         for(std::map<std::string, JSON::Value>::iterator it = o2.begin(); it != o2.end(); ++it){ 
             
             std::cout << "Key: '" << it->first << "' value: '" << it->second.as_string() << "'" << std::endl;
+            std::cout << "Key: '" << it->first << "' value: '" << it->second.as_float() << "'" << std::endl;
         }
-
 
     }
     
+    /**
+     * Creates a JSON object from a ZMQ message.
+     * 
+     * @param msg The received ZMQ message.
+     * @return JSON::Object containing the data read from the message.
+     */
+    static JSON::Object parseZMQMessage(zmq::message_t* msg);
+    
+    
+    /**
+     * Creates a string from JSON object.
+     * @param obj The object that should be serialized.
+     * @return A string with serialized data.
+     */
+    static std::string serializeJSONObject(JSON::Object obj);
+    
 private:
+    
+    
 
 };
 

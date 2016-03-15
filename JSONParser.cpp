@@ -12,13 +12,23 @@
  */
 
 #include "JSONParser.h"
+#include "MessageHandler.h"
 
-JSONParser::JSONParser() {
+/* Creates a JSON object from a string */
+JSON::Object JSONParser::parseZMQMessage(zmq::message_t* msg){
+    
+    
+    std::string str_msg = MessageHandler::getInstance().convertMessage(msg);
+    
+    JSON::Object jsonObject = parse_string(str_msg);
+
+    return jsonObject;
 }
 
-JSONParser::JSONParser(const JSONParser& orig) {
+/* Serializes a JSON object. */
+std::string JSONParser::serializeJSONObject(JSON::Object obj){
+    
+     std::stringstream test;
+     test << obj;
+     return test.str();
 }
-
-JSONParser::~JSONParser() {
-}
-

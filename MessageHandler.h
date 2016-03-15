@@ -16,6 +16,8 @@
 
 #include <iostream>
 #include <zmq.hpp>
+#include "JSONParser.h"
+#include <map>
 
 class MessageHandler {
 public:
@@ -52,7 +54,7 @@ public:
      * @param msg The ZMQ message to be converted.
      * @return The string representing the ZMQ message.
      */
-    static std::string convertMessage(zmq::message_t* msg);
+    std::string convertMessage(zmq::message_t* msg);
     
     /**
      * Creates a ZMQ message from a string.
@@ -60,10 +62,42 @@ public:
      * @param msgdata The string that should be sent.
      * @return ZMQ message representing the string passed as argument.
      */
-    static zmq::message_t buildMessage(std::string msgData);
+    zmq::message_t buildMessage(std::string msgData);
+    
+    
+    /**
+     * Creates a response message for the request. 
+     * 
+     * @param json_request The request message parsed as a JSON::Object
+     * @return A string which contains a serialized JSON::Object.
+     */
+    std::string createResponse(JSON::Object json_request);
+    
+    
     
 private:
     
+    /* Available message types */
+    enum MESSAGE_TYPE {UNKOWN, JOINT_DATA};
+    
+    
+    /**
+     * Detects the type of the message.
+     * 
+     * @param message 
+     * @return The type of the message.
+     */
+    MESSAGE_TYPE detectMessageType(JSON::Object message);
+    
+    /**
+     * Returns the data for a joint.
+     * 
+     * @param message The message, that contains the ID of the joint.
+     * @return A JSON object, that contains the data about the Joint.
+     */
+    JSON::Object getJointData(JSON::Object message);
+    
+
     /**
      * Default constructor.
      */

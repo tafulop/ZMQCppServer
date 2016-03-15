@@ -19,6 +19,7 @@
 #include <iostream> 
 #include <thread> // run server as a new thread
 #include "MessageHandler.h"
+#include "JSONParser.h"
 
 class SocketServer {
     
