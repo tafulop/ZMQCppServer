@@ -65,7 +65,7 @@ void SocketClient::JSONSendingTest(){
     
     MessageHandler& hand = MessageHandler::getInstance();
 
-    std::cout << "Connecting to hello world server…" << std::endl;
+    std::cout << "Connecting to the server…" << std::endl;
     socket.connect ("tcp://localhost:5557");
     
     //  Do 10 requests, waiting each time for a response
@@ -78,8 +78,8 @@ void SocketClient::JSONSendingTest(){
 
 
         // Converting to string and ZMQ message
-        std::string str_req = JSONParser::serializeJSONObject(json_req);
-        zmq::message_t request = hand.buildMessage(str_req);
+        std::shared_ptr<std::string> str_req = JSONParser::serializeJSONObject(json_req);
+        zmq::message_t request = hand.buildMessage(*str_req);
         
         // Send
         socket.send (request);

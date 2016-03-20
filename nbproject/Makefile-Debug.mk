@@ -84,22 +84,22 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libsocketserver.a: ${OBJECTFILES}
 ${OBJECTDIR}/JSONParser.o: JSONParser.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/JSONParser.o JSONParser.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/JSONParser.o JSONParser.cpp
 
 ${OBJECTDIR}/MessageHandler.o: MessageHandler.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler.o MessageHandler.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler.o MessageHandler.cpp
 
 ${OBJECTDIR}/SocketClient.o: SocketClient.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketClient.o SocketClient.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketClient.o SocketClient.cpp
 
 ${OBJECTDIR}/SocketServer.o: SocketServer.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketServer.o SocketServer.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketServer.o SocketServer.cpp
 
 # Subprojects
 .build-subprojects:
@@ -120,25 +120,25 @@ ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SocketCommunicationTest.o ${TESTDIR}/t
 ${TESTDIR}/tests/JSONParserTest.o: tests/JSONParserTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTest.o tests/JSONParserTest.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTest.o tests/JSONParserTest.cpp
 
 
 ${TESTDIR}/tests/JSONParserTestRunner.o: tests/JSONParserTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTestRunner.o tests/JSONParserTestRunner.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTestRunner.o tests/JSONParserTestRunner.cpp
 
 
 ${TESTDIR}/tests/SocketCommunicationTest.o: tests/SocketCommunicationTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTest.o tests/SocketCommunicationTest.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTest.o tests/SocketCommunicationTest.cpp
 
 
 ${TESTDIR}/tests/SocketCommunicationTestRunner.o: tests/SocketCommunicationTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTestRunner.o tests/SocketCommunicationTestRunner.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/SocketCommunicationTestRunner.o tests/SocketCommunicationTestRunner.cpp
 
 
 ${OBJECTDIR}/JSONParser_nomain.o: ${OBJECTDIR}/JSONParser.o JSONParser.cpp 
@@ -149,7 +149,7 @@ ${OBJECTDIR}/JSONParser_nomain.o: ${OBJECTDIR}/JSONParser.o JSONParser.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/JSONParser_nomain.o JSONParser.cpp;\
+	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/JSONParser_nomain.o JSONParser.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/JSONParser.o ${OBJECTDIR}/JSONParser_nomain.o;\
 	fi
@@ -162,7 +162,7 @@ ${OBJECTDIR}/MessageHandler_nomain.o: ${OBJECTDIR}/MessageHandler.o MessageHandl
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler_nomain.o MessageHandler.cpp;\
+	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler_nomain.o MessageHandler.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/MessageHandler.o ${OBJECTDIR}/MessageHandler_nomain.o;\
 	fi
@@ -175,7 +175,7 @@ ${OBJECTDIR}/SocketClient_nomain.o: ${OBJECTDIR}/SocketClient.o SocketClient.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketClient_nomain.o SocketClient.cpp;\
+	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketClient_nomain.o SocketClient.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/SocketClient.o ${OBJECTDIR}/SocketClient_nomain.o;\
 	fi
@@ -188,7 +188,7 @@ ${OBJECTDIR}/SocketServer_nomain.o: ${OBJECTDIR}/SocketServer.o SocketServer.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -include /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketServer_nomain.o SocketServer.cpp;\
+	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SocketServer_nomain.o SocketServer.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/SocketServer.o ${OBJECTDIR}/SocketServer_nomain.o;\
 	fi

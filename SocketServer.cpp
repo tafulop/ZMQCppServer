@@ -48,26 +48,41 @@ void SocketServer::serverListener(){
     zmq::socket_t socket (context, ZMQ_REP);
     socket.bind ("tcp://*:5557");
     MessageHandler& msgHandler = MessageHandler::getInstance();
+    
+    zmq::message_t empty_resp = msgHandler.buildMessage("");
+    
+    zmq::message_t request;
 
     while (true) {
 
         //  Wait for next request from client, blocks
-        zmq::message_t request;
+        std::cout << "Waiting for request..." << std::endl;
         socket.recv (&request);
 
         // Parse the received message as a JSON object
-        JSON::Object json_req = JSONParser::parseZMQMessage(&request);
+        std::shared_ptr<JSON::Object> json_req = JSONParser::parseZMQMessage(&request);
         
+        std::cout << "JSON object received: " << *json_req << std::endl;
+       
         // Pass the JSON object to message handler, and get the response message
-        std::string str_response = msgHandler.createResponse(json_req);
+        std::shared_ptr<std::string> str_response = msgHandler.createResponse(*json_req);
 
         std::cout << "SocketServer - Response created: " << str_response << std::endl;
-        
+
         // if there is anything in response, build message
-        if(str_response.empty() == false){
-            zmq::message_t zmq_response = msgHandler.buildMessage(str_response);
+        if(str_response){
+
+            std::cout << "Sending response..." << std::endl;
+
+            zmq::message_t zmq_response = msgHandler.buildMessage(*str_response);
+
             socket.send (zmq_response);
+
+        }else{
+            std::cout << "Empty response will be sent." << std::endl;
+            socket.send(empty_resp);
         }   
+        
     }
 }
 

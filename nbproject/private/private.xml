@@ -7,8 +7,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/tests/SocketCommunicationTest.cpp</file>
             <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketServer.h</file>
             <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/MessageHandler.h</file>
+            <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/tests/SocketCommunicationTest.h</file>
             <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/MessageHandler.cpp</file>
             <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/SocketClient.h</file>
             <file>file:/mnt/western_digital_2TB/Development/Robotkar/SocketServer/JSONParser.cpp</file>

@@ -18,6 +18,7 @@
 #include <zmq.hpp>
 #include "JSONParser.h"
 #include <map>
+#include <memory>
 
 class MessageHandler {
 public:
@@ -71,14 +72,14 @@ public:
      * @param json_request The request message parsed as a JSON::Object
      * @return A string which contains a serialized JSON::Object.
      */
-    std::string createResponse(JSON::Object json_request);
+    std::shared_ptr<std::string> createResponse(JSON::Object json_request);
     
     
     
 private:
     
     /* Available message types */
-    enum MESSAGE_TYPE {UNKOWN, JOINT_DATA};
+    enum MESSAGE_TYPE {UNKOWN, JOINT_DATA_REQ};
     
     
     /**

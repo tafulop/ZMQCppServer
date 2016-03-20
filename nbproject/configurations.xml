@@ -61,7 +61,7 @@
         <ccTool>
           <standard>8</standard>
           <incFile>
-            <pElem>/mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/json.hh</pElem>
+            <pElem>/mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh</pElem>
           </incFile>
           <commandLine>-lzmq -lpthread</commandLine>
         </ccTool>

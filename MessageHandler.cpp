@@ -46,6 +46,11 @@ std::string MessageHandler::convertMessage(zmq::message_t* msg){
     return rpl;
 }
 
+
+
+
+
+
 /* Builds ZMQ message from a string */
 zmq::message_t MessageHandler::buildMessage(std::string msgData){
     
@@ -55,8 +60,12 @@ zmq::message_t MessageHandler::buildMessage(std::string msgData){
     return message;
 }
 
+
+
 /* Creates a respone based on a json message */
-std::string MessageHandler::createResponse(JSON::Object json_request){
+std::shared_ptr<std::string> MessageHandler::createResponse(JSON::Object json_request){
+    
+    std::cout << "Creating response..." << std::endl;
     
     // Get Message type
     MESSAGE_TYPE t = detectMessageType(json_request);
@@ -65,16 +74,21 @@ std::string MessageHandler::createResponse(JSON::Object json_request){
     
     switch(t){
         
-        case MESSAGE_TYPE::JOINT_DATA   :   json_response = getJointData(json_request);
-                                            break;
-        default:    return "";
+        case MESSAGE_TYPE::JOINT_DATA_REQ   :   json_response = getJointData(json_request);
+                                                break;
+        default:    return nullptr;
     } 
     
     // serialize json object
-    std::string str_response = JSONParser::serializeJSONObject(json_response);
+    std::shared_ptr<std::string> str_response = JSONParser::serializeJSONObject(json_response);
+    
+    std::cout << "Creating response... DONE" << std::endl;
      
     return str_response;
 }
+
+
+
 
 /* Returns joint data for the joint addressed in the message */
 JSON::Object MessageHandler::getJointData(JSON::Object message){
@@ -104,18 +118,27 @@ JSON::Object MessageHandler::getJointData(JSON::Object message){
 }
 
 
+
+
+
+
 /* Detects the type of the given message. */
 MessageHandler::MESSAGE_TYPE MessageHandler::detectMessageType(JSON::Object message){
+    
     
     std::string value;
     
     for(std::map<std::string, JSON::Value>::iterator it = message.begin(); it != message.end(); ++it){     
-        value = it->second.as_string();
-        if(value == "JOINT_DATA")
-            return MESSAGE_TYPE::JOINT_DATA;
+        if(it->first == "MESSAGE_TYPE"){
+            if(it->second.as_string() == "JOINT_DATA_REQ")
+            std::cout << "Message type is: JOINT_DATA_REQ" << std::endl;    
+            return MESSAGE_TYPE::JOINT_DATA_REQ;
+        }
+        
     }
 
     // type not found in the message
+    std::cout << "Unknown message type." << std::endl;
     return MessageHandler::MESSAGE_TYPE::UNKOWN;
 }
 
