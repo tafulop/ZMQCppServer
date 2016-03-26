@@ -13,6 +13,9 @@
 
 #include "SocketServer.h"
 
+// set default state
+bool SocketServer::running = false;
+
 /* Default constructor*/
 SocketServer::SocketServer() {
 }
@@ -35,9 +38,18 @@ SocketServer SocketServer::getInstance(){
 /* Starts the socket server */
 void SocketServer::runServer(){
     
-    // start server
-    this->serverThread = std::thread(SocketServer::serverListener);
-   
+    std::lock_guard<std::mutex> guard(running_flag_mutex);
+    bool l_running_flag = SocketServer::running;
+    guard.~lock_guard();
+    
+    // start only if not running
+    if(l_running_flag == false){
+        // start server
+        serverThread = std::thread(SocketServer::serverListener);
+
+        // set running flag
+        SocketServer::running = true;
+    }
 }
 
 /* Listens for new messages */
@@ -53,7 +65,8 @@ void SocketServer::serverListener(){
     
     zmq::message_t request;
 
-    while (true) {
+    // loops while data server is running
+    while (SocketServer::running == true) {
 
         //  Wait for next request from client, blocks
         std::cout << "Waiting for request..." << std::endl;
@@ -84,6 +97,9 @@ void SocketServer::serverListener(){
         }   
         
     }
+    
+    // server stopped -> close socket
+    socket.close();
 }
 
 
@@ -92,5 +108,20 @@ void SocketServer::joinThread(){
     this->serverThread.join();
 }
 
+/* Sets the running flag to false */
+// TO-DO: handle socket blocking receive related problem
+void SocketServer::stopServer(){
+    std::lock_guard<std::mutex> guard(SocketServer::running_flag_mutex);
+    SocketServer::running= false;
+}
 
+/* check if the server is running */
+bool SocketServer::isRunning(){
+    
+    std::lock_guard<std::mutex> guard(SocketServer::running_flag_mutex);
+    bool l_running_flag = SocketServer::running;
+    guard.~lock_guard();
+    
+    return l_running_flag;
+}
 

@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/JSONParser.o \
 	${OBJECTDIR}/MessageHandler.o \
+	${OBJECTDIR}/SimulationManager.o \
 	${OBJECTDIR}/SocketClient.o \
 	${OBJECTDIR}/SocketServer.o
 
@@ -90,6 +91,11 @@ ${OBJECTDIR}/MessageHandler.o: MessageHandler.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler.o MessageHandler.cpp
+
+${OBJECTDIR}/SimulationManager.o: SimulationManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SimulationManager.o SimulationManager.cpp
 
 ${OBJECTDIR}/SocketClient.o: SocketClient.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -165,6 +171,19 @@ ${OBJECTDIR}/MessageHandler_nomain.o: ${OBJECTDIR}/MessageHandler.o MessageHandl
 	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MessageHandler_nomain.o MessageHandler.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/MessageHandler.o ${OBJECTDIR}/MessageHandler_nomain.o;\
+	fi
+
+${OBJECTDIR}/SimulationManager_nomain.o: ${OBJECTDIR}/SimulationManager.o SimulationManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/SimulationManager.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SimulationManager_nomain.o SimulationManager.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/SimulationManager.o ${OBJECTDIR}/SimulationManager_nomain.o;\
 	fi
 
 ${OBJECTDIR}/SocketClient_nomain.o: ${OBJECTDIR}/SocketClient.o SocketClient.cpp 

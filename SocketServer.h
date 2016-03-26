@@ -22,6 +22,7 @@
 #include "JSONParser.h"
 #include <exception>
 #include <memory>
+#include <mutex>
 
 class SocketServer {
     
@@ -53,16 +54,30 @@ public:
     void runServer();
     
     /**
+     * Stops the socket server.
+     */
+    void stopServer();
+    
+    /**
+     * Checks if the server is running.
+     * @return true if server is running, false if not.
+     */
+    bool isRunning();
+    
+    /**
      * Joins to the server thread.
      */
     void joinThread();
     
 
 private:
-
+    
+    /* Running flag for the socket server */
+    static bool running;
+    std::mutex running_flag_mutex;
+    
     /* thread to run socket server */
     std::thread serverThread;
-    
     
 
     /**
@@ -71,14 +86,11 @@ private:
      */
     static void serverListener();
     
-    
     /**
      * Default constructor.
      */
     SocketServer();
     
-    
-
 };
 #endif /* SOCKETSERVER_H */
 

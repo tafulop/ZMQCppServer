@@ -104,8 +104,9 @@ JSON::Object MessageHandler::getJointData(JSON::Object message){
     }
     
     // Get angle for joint
+    
     // TO-DO: read angle from partcontainer
-    float angle = 0;
+    float angle = 1234.5678;
     
     // build a new json object with fresh data
     JSON::Object response;
@@ -114,7 +115,6 @@ JSON::Object MessageHandler::getJointData(JSON::Object message){
     response["ANGLE"] = angle;
     
     return response;
-
 }
 
 
