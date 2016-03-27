@@ -46,13 +46,13 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f3 \
 	${TESTDIR}/TestFiles/f2
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/JSONParserTest.o \
-	${TESTDIR}/tests/JSONParserTestRunner.o \
+	${TESTDIR}/tests/MessageHandlerTest.o \
+	${TESTDIR}/tests/MessageHandlerTestRunner.o \
 	${TESTDIR}/tests/SocketCommunicationTest.o \
 	${TESTDIR}/tests/SocketCommunicationTestRunner.o
 
@@ -113,26 +113,28 @@ ${OBJECTDIR}/SocketServer.o: SocketServer.cpp
 # Build Test Targets
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
+	cd /mnt/seagate_1TB/Development/Robotkar_reboot/RoboticArmPartLibrary && ${MAKE}  -f Makefile CONF=Debug
+	cd /mnt/seagate_1TB/Development/Robotkar_reboot/PartContainerLibrary && ${MAKE}  -f Makefile CONF=Debug
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/JSONParserTest.o ${TESTDIR}/tests/JSONParserTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/MessageHandlerTest.o ${TESTDIR}/tests/MessageHandlerTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
+	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} /mnt/seagate_1TB/Development/Robotkar_reboot/PartContainerLibrary/dist/Debug/GNU-Linux/libpartcontainerlibrary.a /mnt/seagate_1TB/Development/Robotkar_reboot/RoboticArmPartLibrary/dist/Debug/GNU-Linux/libroboticarmpartlibrary.a /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
 
 ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SocketCommunicationTest.o ${TESTDIR}/tests/SocketCommunicationTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
+	${LINK.cc} -lzmq  -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} /mnt/seagate_1TB/Development/Robotkar_reboot/PartContainerLibrary/dist/Debug/GNU-Linux/libpartcontainerlibrary.a /mnt/seagate_1TB/Development/Robotkar_reboot/RoboticArmPartLibrary/dist/Debug/GNU-Linux/libroboticarmpartlibrary.a /mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/JSONParserTest.o: tests/JSONParserTest.cpp 
+${TESTDIR}/tests/MessageHandlerTest.o: tests/MessageHandlerTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTest.o tests/JSONParserTest.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/MessageHandlerTest.o tests/MessageHandlerTest.cpp
 
 
-${TESTDIR}/tests/JSONParserTestRunner.o: tests/JSONParserTestRunner.cpp 
+${TESTDIR}/tests/MessageHandlerTestRunner.o: tests/MessageHandlerTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTestRunner.o tests/JSONParserTestRunner.cpp
+	$(COMPILE.cc) -g -include /mnt/seagate_1TB/Development/Robotkar_reboot/CustomLibraries/json.hh -std=c++11 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/MessageHandlerTestRunner.o tests/MessageHandlerTestRunner.cpp
 
 
 ${TESTDIR}/tests/SocketCommunicationTest.o: tests/SocketCommunicationTest.cpp 
@@ -216,7 +218,7 @@ ${OBJECTDIR}/SocketServer_nomain.o: ${OBJECTDIR}/SocketServer.o SocketServer.cpp
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
 	else  \
 	    ./${TEST} || true; \

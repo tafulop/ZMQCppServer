@@ -27,13 +27,13 @@
                    displayName="Test Files"
                    projectFiles="false"
                    kind="TEST_LOGICAL_FOLDER">
-      <logicalFolder name="f1"
-                     displayName="JSONParserTest"
+      <logicalFolder name="f3"
+                     displayName="MessageHandlerTest"
                      projectFiles="true"
                      kind="TEST">
-        <itemPath>tests/JSONParserTest.cpp</itemPath>
-        <itemPath>tests/JSONParserTest.h</itemPath>
-        <itemPath>tests/JSONParserTestRunner.cpp</itemPath>
+        <itemPath>tests/MessageHandlerTest.cpp</itemPath>
+        <itemPath>tests/MessageHandlerTest.h</itemPath>
+        <itemPath>tests/MessageHandlerTestRunner.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2"
                      displayName="SocketCommunicationTest"
@@ -93,23 +93,33 @@
       <folder path="TestFiles">
         <linkerTool>
           <linkerLibItems>
+            <linkerLibProjectItem>
+              <makeArtifact PL="/mnt/seagate_1TB/Development/Robotkar_reboot/PartContainerLibrary"
+                            CT="3"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="/mnt/seagate_1TB/Development/Robotkar_reboot/PartContainerLibrary"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libpartcontainerlibrary.a">
+              </makeArtifact>
+            </linkerLibProjectItem>
+            <linkerLibProjectItem>
+              <makeArtifact PL="/mnt/seagate_1TB/Development/Robotkar_reboot/RoboticArmPartLibrary"
+                            CT="3"
+                            CN="Debug"
+                            AC="true"
+                            BL="true"
+                            WD="/mnt/seagate_1TB/Development/Robotkar_reboot/RoboticArmPartLibrary"
+                            BC="${MAKE}  -f Makefile CONF=Debug"
+                            CC="${MAKE}  -f Makefile CONF=Debug clean"
+                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libroboticarmpartlibrary.a">
+              </makeArtifact>
+            </linkerLibProjectItem>
             <linkerLibFileItem>/mnt/western_digital_2TB/Development/Robotkar/CustomLibraries/libjson.a</linkerLibFileItem>
           </linkerLibItems>
           <commandLine>-lzmq</commandLine>
-        </linkerTool>
-      </folder>
-      <folder path="TestFiles/f1">
-        <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
-        </cTool>
-        <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
-        </ccTool>
-        <linkerTool>
-          <output>${TESTDIR}/TestFiles/f1</output>
-          <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
-          </linkerLibItems>
         </linkerTool>
       </folder>
       <folder path="TestFiles/f2">
@@ -126,11 +136,25 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
-      <item path="tests/JSONParserTest.cpp" ex="false" tool="1" flavor2="0">
+      <folder path="TestFiles/f3">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="tests/MessageHandlerTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/JSONParserTest.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/MessageHandlerTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/JSONParserTestRunner.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/MessageHandlerTestRunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/SocketCommunicationTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -184,20 +208,6 @@
       </item>
       <item path="SocketServer.h" ex="false" tool="3" flavor2="0">
       </item>
-      <folder path="TestFiles/f1">
-        <cTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
-        </cTool>
-        <ccTool>
-          <commandLine>`cppunit-config --cflags`</commandLine>
-        </ccTool>
-        <linkerTool>
-          <output>${TESTDIR}/TestFiles/f1</output>
-          <linkerLibItems>
-            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
-          </linkerLibItems>
-        </linkerTool>
-      </folder>
       <folder path="TestFiles/f2">
         <cTool>
           <commandLine>`cppunit-config --cflags`</commandLine>
@@ -212,11 +222,25 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
-      <item path="tests/JSONParserTest.cpp" ex="false" tool="1" flavor2="0">
+      <folder path="TestFiles/f3">
+        <cTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <item path="tests/MessageHandlerTest.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="tests/JSONParserTest.h" ex="false" tool="3" flavor2="0">
+      <item path="tests/MessageHandlerTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="tests/JSONParserTestRunner.cpp" ex="false" tool="1" flavor2="0">
+      <item path="tests/MessageHandlerTestRunner.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/SocketCommunicationTest.cpp" ex="false" tool="1" flavor2="0">
       </item>

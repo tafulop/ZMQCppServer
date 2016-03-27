@@ -6,6 +6,16 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/JSONParser.h</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/JSONParser.cpp</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/SocketServer.cpp</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/SimulationManager.cpp</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/SocketServer.h</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/SimulationManager.h</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/SocketClient.cpp</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/MessageHandler.cpp</file>
+            <file>file:/mnt/seagate_1TB/Development/Robotkar_reboot/SocketServer/MessageHandler.h</file>
+        </group>
     </open-files>
 </project-private>

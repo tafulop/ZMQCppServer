@@ -19,6 +19,7 @@
 #include "JSONParser.h"
 #include <map>
 #include <memory>
+#include "../PartContainerLibrary/PartContainerManager.h"
 
 class MessageHandler {
 public:
@@ -81,6 +82,8 @@ private:
     /* Available message types */
     enum MESSAGE_TYPE {UNKOWN, JOINT_DATA_REQ};
     
+    /* Robotic Arm Data */
+    PartContainerManager& partManager = PartContainerManager::getInstance();
     
     /**
      * Detects the type of the message.

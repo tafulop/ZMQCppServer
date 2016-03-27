@@ -103,18 +103,30 @@ JSON::Object MessageHandler::getJointData(JSON::Object message){
         }
     }
     
-    // Get angle for joint
-    
-    // TO-DO: read angle from partcontainer
-    float angle = 1234.5678;
-    
-    // build a new json object with fresh data
-    JSON::Object response;
-    
-    response["JOINT_ID"] = jointId;
-    response["ANGLE"] = angle;
-    
-    return response;
+    // Get angle from joint
+    try{
+        
+        float angle = this->partManager.joints.get(jointId)->getAngle();
+        
+        // build a new json object with fresh data
+        JSON::Object response;
+
+        response["JOINT_ID"] = jointId;
+        response["ANGLE"] = angle;
+
+        return response;
+        
+        
+    } catch(std::out_of_range oor){
+        // joint with this ID not found -> error message
+        JSON::Object response;
+        
+        response["MESSAGE_TYPE"] = "ERROR_MESSAGE";
+        response["DESCRIPTION"] = "No joint found with id: " + jointId;
+        
+        return response;
+    }
+   
 }
 
 

@@ -46,13 +46,13 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f3 \
 	${TESTDIR}/TestFiles/f2
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/JSONParserTest.o \
-	${TESTDIR}/tests/JSONParserTestRunner.o \
+	${TESTDIR}/tests/MessageHandlerTest.o \
+	${TESTDIR}/tests/MessageHandlerTestRunner.o \
 	${TESTDIR}/tests/SocketCommunicationTest.o \
 	${TESTDIR}/tests/SocketCommunicationTestRunner.o
 
@@ -114,25 +114,25 @@ ${OBJECTDIR}/SocketServer.o: SocketServer.cpp
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
-${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/JSONParserTest.o ${TESTDIR}/tests/JSONParserTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/MessageHandlerTest.o ${TESTDIR}/tests/MessageHandlerTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
-	${LINK.cc}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
 
 ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/SocketCommunicationTest.o ${TESTDIR}/tests/SocketCommunicationTestRunner.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
 
 
-${TESTDIR}/tests/JSONParserTest.o: tests/JSONParserTest.cpp 
+${TESTDIR}/tests/MessageHandlerTest.o: tests/MessageHandlerTest.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTest.o tests/JSONParserTest.cpp
+	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/MessageHandlerTest.o tests/MessageHandlerTest.cpp
 
 
-${TESTDIR}/tests/JSONParserTestRunner.o: tests/JSONParserTestRunner.cpp 
+${TESTDIR}/tests/MessageHandlerTestRunner.o: tests/MessageHandlerTestRunner.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/JSONParserTestRunner.o tests/JSONParserTestRunner.cpp
+	$(COMPILE.cc) -O2 `cppunit-config --cflags` -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/MessageHandlerTestRunner.o tests/MessageHandlerTestRunner.cpp
 
 
 ${TESTDIR}/tests/SocketCommunicationTest.o: tests/SocketCommunicationTest.cpp 
@@ -216,7 +216,7 @@ ${OBJECTDIR}/SocketServer_nomain.o: ${OBJECTDIR}/SocketServer.o SocketServer.cpp
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
-	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
 	else  \
 	    ./${TEST} || true; \
