@@ -61,7 +61,7 @@ void SocketServer::serverListener(){
     socket.bind ("tcp://*:5557");
     MessageHandler& msgHandler = MessageHandler::getInstance();
     
-    zmq::message_t empty_resp = msgHandler.buildMessage("");
+    zmq::message_t empty_resp = buildMessage("");
     
     zmq::message_t request;
 
@@ -72,14 +72,21 @@ void SocketServer::serverListener(){
         std::cout << "Waiting for request..." << std::endl;
         socket.recv (&request);
 
+        // convert ZMQ message to string
+        std::string str_msg = convertMessage(&request);
+        
         // Parse the received message as a JSON object
-        std::shared_ptr<JSON::Object> json_req = JSONParser::parseZMQMessage(&request);
+        std::shared_ptr<JSON::Object> json_req = JSONParser::deserialize(str_msg);
         
         std::cout << "JSON object received: " << *json_req << std::endl;
        
         // Pass the JSON object to message handler, and get the response message
-        std::shared_ptr<std::string> str_response = msgHandler.createResponse(*json_req);
+        
+        std::shared_ptr<JSON::Object> json_response = msgHandler.createResponse(*json_req);
 
+        // serialize json object
+        std::shared_ptr<std::string> str_response = JSONParser::serialize(*json_response);
+        
         std::cout << "SocketServer - Response created: " << str_response << std::endl;
 
         // if there is anything in response, build message
@@ -87,7 +94,7 @@ void SocketServer::serverListener(){
 
             std::cout << "Sending response..." << std::endl;
 
-            zmq::message_t zmq_response = msgHandler.buildMessage(*str_response);
+            zmq::message_t zmq_response = buildMessage(*str_response);
 
             socket.send (zmq_response);
 
@@ -102,6 +109,23 @@ void SocketServer::serverListener(){
     socket.close();
 }
 
+
+/* Converts ZMQ message to string */
+std::string SocketServer::convertMessage(zmq::message_t* msg){
+    
+    std::string rpl = std::string(static_cast<char*>(msg->data()), msg->size());
+    std::cout << "Message converted into: " << rpl << std::endl;
+    return rpl;
+}
+
+/* Builds ZMQ message from a string */
+zmq::message_t SocketServer::buildMessage(std::string msgData){
+    
+    zmq::message_t message (msgData.size());
+    memcpy (message.data (), msgData.c_str(), msgData.size());
+    std::cout << "Message built: " << msgData << std::endl;
+    return message;
+}
 
 /* Joins to the server thread */
 void SocketServer::joinThread(){

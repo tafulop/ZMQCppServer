@@ -30,7 +30,7 @@ public:
      * @param msg The received ZMQ message.
      * @return JSON::Object containing the data read from the message.
      */
-    static std::shared_ptr<JSON::Object>  parseZMQMessage(zmq::message_t* msg);
+    static std::shared_ptr<JSON::Object> deserialize(std::string msg);
     
     
     /**
@@ -38,7 +38,7 @@ public:
      * @param obj The object that should be serialized.
      * @return A string with serialized data.
      */
-    static std::shared_ptr<std::string> serializeJSONObject(JSON::Object obj);
+    static std::shared_ptr<std::string> serialize(JSON::Object obj);
     
 private:
     

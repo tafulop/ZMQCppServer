@@ -16,28 +16,27 @@
 #include <memory>
 
 /* Creates a JSON object from a string */
-std::shared_ptr<JSON::Object> JSONParser::parseZMQMessage(zmq::message_t* msg){
+std::shared_ptr<JSON::Object> JSONParser::deserialize(std::string msg){
     
     std::cout << "Parsing ZMQ message..." << std::endl;
 
     std::shared_ptr<JSON::Object> json_mess;
-    std::string str_msg = MessageHandler::getInstance().convertMessage(msg);
     
-    std::cout << "string: " << str_msg;
+    std::cout << "string: " << msg;
     
     try{
-        json_mess = std::make_shared<JSON::Object>(parse_string(str_msg));
+        json_mess = std::make_shared<JSON::Object>(parse_string(msg));
         std::cout << "parsing ZMQ message... DONE." << std::endl;
         std::cout << "Created JSON: " << json_mess << std::endl;
         
     }catch(int i){
-        std::cout << "Error in parsing: " << str_msg  << std::endl;
+        std::cout << "Error in parsing: " << msg  << std::endl;
     }
     return json_mess;
 }
 
 /* Serializes a JSON object. */
-std::shared_ptr<std::string> JSONParser::serializeJSONObject(JSON::Object obj){
+std::shared_ptr<std::string> JSONParser::serialize(JSON::Object obj){
     
     // Put into stringstream
     std::stringstream test;

@@ -69,6 +69,23 @@ public:
      */
     void joinThread();
     
+    /**
+     * Converts the ZMQ message to string.
+     * 
+     * @param msg The ZMQ message to be converted.
+     * @return The string representing the ZMQ message.
+     */
+    static std::string convertMessage(zmq::message_t* msg);
+    
+    
+    /**
+     * Creates a ZMQ message from a string.
+     * 
+     * @param msgdata The string that should be sent.
+     * @return ZMQ message representing the string passed as argument.
+     */
+    static zmq::message_t buildMessage(std::string msgData);
+    
 
 private:
     

@@ -43,37 +43,12 @@ public:
     
     
     /**
-     * Creates a corresponding response message for the request message.
-     * @param request The request message in string representation.
-     * @return The response for the request as a string.
-     */
-    std::string createResponse(std::string request);
-    
-    
-    /**
-     * Converts the ZMQ message to string.
-     * 
-     * @param msg The ZMQ message to be converted.
-     * @return The string representing the ZMQ message.
-     */
-    std::string convertMessage(zmq::message_t* msg);
-    
-    /**
-     * Creates a ZMQ message from a string.
-     * 
-     * @param msgdata The string that should be sent.
-     * @return ZMQ message representing the string passed as argument.
-     */
-    zmq::message_t buildMessage(std::string msgData);
-    
-    
-    /**
      * Creates a response message for the request. 
      * 
      * @param json_request The request message parsed as a JSON::Object
      * @return A string which contains a serialized JSON::Object.
      */
-    std::shared_ptr<std::string> createResponse(JSON::Object json_request);
+    std::shared_ptr<JSON::Object> createResponse(JSON::Object json_request);
     
     
     

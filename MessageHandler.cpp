@@ -29,65 +29,31 @@ MessageHandler& MessageHandler::getInstance(){
     return instance;
 }
 
-/* Creates response based on the request */
-std::string MessageHandler::createResponse(std::string request){
-
-    // now it sends back the received string
-    std::cout << "Message response created: " << request << std::endl;
-    return request;
-}
-
-
-/* Converts ZMQ message to string */
-std::string MessageHandler::convertMessage(zmq::message_t* msg){
-    
-    std::string rpl = std::string(static_cast<char*>(msg->data()), msg->size());
-    std::cout << "Message converted into: " << rpl << std::endl;
-    return rpl;
-}
-
-
-
-
-
-
-/* Builds ZMQ message from a string */
-zmq::message_t MessageHandler::buildMessage(std::string msgData){
-    
-    zmq::message_t message (msgData.size());
-    memcpy (message.data (), msgData.c_str(), msgData.size());
-    std::cout << "Message built: " << msgData << std::endl;
-    return message;
-}
-
-
 
 /* Creates a respone based on a json message */
-std::shared_ptr<std::string> MessageHandler::createResponse(JSON::Object json_request){
+std::shared_ptr<JSON::Object> MessageHandler::createResponse(JSON::Object json_request){
     
     std::cout << "Creating response..." << std::endl;
     
     // Get Message type
     MESSAGE_TYPE t = detectMessageType(json_request);
   
-    JSON::Object json_response;
+    std::shared_ptr<JSON::Object> json_response;
+    
     
     switch(t){
         
-        case MESSAGE_TYPE::JOINT_DATA_REQ   :   json_response = getJointData(json_request);
+        case MESSAGE_TYPE::JOINT_DATA_REQ   :   json_response = std::make_shared<JSON::Object>(getJointData(json_request));
                                                 break;
         default:    return nullptr;
     } 
     
-    // serialize json object
-    std::shared_ptr<std::string> str_response = JSONParser::serializeJSONObject(json_response);
+    
     
     std::cout << "Creating response... DONE" << std::endl;
      
-    return str_response;
+    return json_response;
 }
-
-
 
 
 /* Returns joint data for the joint addressed in the message */
@@ -128,10 +94,6 @@ JSON::Object MessageHandler::getJointData(JSON::Object message){
     }
    
 }
-
-
-
-
 
 
 /* Detects the type of the given message. */

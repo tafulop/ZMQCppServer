@@ -12,6 +12,7 @@
  */
 
 #include "SocketClient.h"
+#include "SocketServer.h"
 
 SocketClient::SocketClient() {
 }
@@ -44,13 +45,13 @@ void SocketClient::localClientTest(){
     for (int request_nbr = 0; request_nbr != 10; request_nbr++) {
         
         std::string msgData = "dummy data";
-        zmq::message_t request = hand.buildMessage(msgData);
+        zmq::message_t request = SocketServer::buildMessage(msgData);
         socket.send (request);
 
         //  Get the reply.
         zmq::message_t reply;
         socket.recv (&reply);
-        std::string response = hand.convertMessage(&reply);
+        std::string response = SocketServer::convertMessage(&reply);
         std::cout << "Received by client: " << response << std::endl;
     }
 
@@ -78,8 +79,8 @@ void SocketClient::JSONSendingTest(){
 
 
         // Converting to string and ZMQ message
-        std::shared_ptr<std::string> str_req = JSONParser::serializeJSONObject(json_req);
-        zmq::message_t request = hand.buildMessage(*str_req);
+        std::shared_ptr<std::string> str_req = JSONParser::serialize(json_req);
+        zmq::message_t request = SocketServer::buildMessage(*str_req);
         
         // Send
         socket.send (request);
@@ -87,7 +88,7 @@ void SocketClient::JSONSendingTest(){
         //  Get the reply
         zmq::message_t reply;
         socket.recv (&reply);
-        std::string response = hand.convertMessage(&reply);
+        std::string response = SocketServer::convertMessage(&reply);
         std::cout << "Received by client: " << response << std::endl;
     }
     
